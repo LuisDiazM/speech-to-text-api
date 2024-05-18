@@ -1,0 +1,1 @@
+SUPPORT_TYPES = ["audio/mpeg","audio/wave"]
