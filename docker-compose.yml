@@ -4,11 +4,9 @@ services:
 
   transcriptor:
     build: .
-    image: speechtotext:v1
+    image: speechtotext:v2
     restart: always
     env_file: .env
-    ports:
-      - 8000:8000
     network_mode: "host"
     volumes:
       - ./models:/app/models

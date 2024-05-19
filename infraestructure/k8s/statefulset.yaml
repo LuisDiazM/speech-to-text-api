@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: speechtotextapisvc
+  namespace: develop
+spec:
+  ports:
+  - port: 8000
+  selector:
+    app: speechtotextapi
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: speechtotextapi
+  namespace: develop
+spec:
+  selector:
+    matchLabels:
+      app: speechtotextapi
+  serviceName: "speechtotextapisvc"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: speechtotextapi
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: speechtotextapi
+        image: luisdiazm/fasterwhisperapi:v1
+        ports:
+        - containerPort: 8000
+          name: web
+        env:
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: speechtotextapisecret
+                key: API_KEY
+          - name: MODEL_PATH
+            valueFrom:
+              secretKeyRef:
+                name: speechtotextapisecret
+                key: MODEL_PATH
+        volumeMounts:
+        - name: iamodel-volume
+          mountPath: /app/models
+      volumes:
+      - name: iamodel-volume
+        persistentVolumeClaim:
+          claimName: fasterwhispermodel
