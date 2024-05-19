@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from infraestructure.web.routers.routes import routers
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 app.add_middleware(
@@ -11,4 +12,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(routers)
+
+Instrumentator().instrument(app).expose(app)
 
