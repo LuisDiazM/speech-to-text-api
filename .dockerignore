@@ -1,0 +1,6 @@
+download
+.vscode
+__pycache__
+Readme.md
+*.env
+*.env.example

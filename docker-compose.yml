@@ -9,5 +9,5 @@ services:
     env_file: .env
     network_mode: "host"
     volumes:
-      - ./models:/app/models
+      - ./download/models:/app/models
     command: ["uvicorn","main:app"]
