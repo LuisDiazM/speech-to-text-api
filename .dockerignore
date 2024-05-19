@@ -4,3 +4,4 @@ __pycache__
 Readme.md
 *.env
 *.env.example
+Dockerfile

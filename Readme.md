@@ -40,7 +40,7 @@ mkdir mnt & mkdir data
 
 4. Cargar la información del modelo descargado dentro del cluster, se recomienda desde el directorio download
 ```
-minikube mount models:/mnt/data
+minikube mount download/models:/mnt/data
 ```
 5. Exponer un servicio tipo nodePort para poder comunicarnos con el API
 ```

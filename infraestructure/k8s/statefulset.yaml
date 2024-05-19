@@ -20,7 +20,7 @@ spec:
     matchLabels:
       app: speechtotextapi
   serviceName: "speechtotextapisvc"
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -44,6 +44,16 @@ spec:
               secretKeyRef:
                 name: speechtotextapisecret
                 key: MODEL_PATH
+          - name: DEVICE
+            valueFrom:
+              secretKeyRef:
+                name: speechtotextapisecret
+                key: DEVICE
+          - name: PRECISION_DEVICE
+            valueFrom:
+              secretKeyRef:
+                name: speechtotextapisecret
+                key: PRECISION_DEVICE
         volumeMounts:
         - name: iamodel-volume
           mountPath: /app/models
