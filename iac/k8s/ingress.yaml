@@ -1,0 +1,32 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-api-speech
+  namespace: integrations
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.org/proxy-max-temp-file-size: "1024m"
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  # tls:
+  # - hosts:
+  #   - app.operaguru.uk
+  #   secretName: echo-tls
+  rules:
+  - host: app.operaguru.uk
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: speechtotextapisvc
+            port:
+              number: 8000
+
+
+

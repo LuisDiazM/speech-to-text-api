@@ -4,7 +4,7 @@ metadata:
   name: iamodels
 spec:
   capacity:
-    storage: 1Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -17,11 +17,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fasterwhispermodel
-  namespace: develop
+  namespace: integrations
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
   storageClassName: standard
